@@ -23,7 +23,8 @@ If you intend to compile, you'll need to install the Go language
 
 If you have Go installed, you can get s3cp the "Go way" like this:
 ```
-go install http://github.com/tdunnington/s3cp
+go get -u http://github.com/aws/aws-sdk-go
+go get http://github.com/tdunnington/s3cp
 ```
 
 ### Step 2 - Setup your AWS S3 Bucket
@@ -199,3 +200,4 @@ For s3cp, still left to do are:
 * Support for downloading
 * Redirect STDIN and STDOUT, or piping
 * On-the-fly compression
+* Not sure how the `go get` dependencies work for my package, need to check that out
