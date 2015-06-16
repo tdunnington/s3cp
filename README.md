@@ -5,7 +5,12 @@ An scp-style command-line tool for uploading and downloading files to and from a
 * [License](README.md#license)
 * [Project Status](README.md#current-status)
 * [How to use s3cp](README.md#how-to-use-s3cp)
-** [Install s3cp](README.md#step-1-install-s3cp)
+* [Install s3cp](README.md#step-1---install-s3cp)
+* [Setup your bucket](README.md#step-2---setup-your-aws-s3-bucket)
+* [Setup your credentials](README.md#step-3---setup-your-credentials)
+* [Use s3cp](README.md#step-4---use-s3cp)
+* [About this project](README.md#about-this-project)
+* [Upcoming features](README.md#upcoming-features)
 
 ### License
 Released under the Apache 2.0 license
@@ -118,7 +123,7 @@ Then launch your server, and make sure to select the new role when you launch:
 
 ...TODO add screenshots...
 
-### Step 3 - Create your credentials file/environment variables
+### Step 3 - Setup your credentials
 If you are using a security role, you can skip this step and start using s3cp on your server.
 
 In the previous step, when you created the IAM group, you saved the security keys. You can inform s3cp of these
@@ -203,7 +208,6 @@ and more. With the complete toolkit, you should be able to script some cool cmdl
 
 ### Upcoming Features
 For s3cp, still left to do are:
-* Support for downloading
 * Redirect STDIN and STDOUT, or piping
 * On-the-fly compression
 * Not sure how the `go get` dependencies work for my package, need to check that out
