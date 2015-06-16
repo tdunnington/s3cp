@@ -16,22 +16,15 @@
  *
  * Uploads or downloads a file from an S3 bucket, using scp conventions.
  *
- * The intent of this program is to provide an scp-like method of working with files in S3.
- * At the outset, I intend to use this for daily backups, from a shell script, but I also
- * see that it could be used for other purposes.
- *
- * Where possible, I'll follow scp conventions. AWS credentials will be stored in the default
- * location for the go AWS implementation - ~/.aws/credentials.
- *
  * USAGE:
  *
  *     s3cp [--help] [--quiet] [--debug] [--region regionname] source destination
  *
  * WHERE:
  *
- *     --help      : prints help
+ *     --help          : prints help
  *
- *     --quiet     : suppress output
+ *     --quiet         : suppress output
  * 
  *     --debug         : debug mode, prints lots of debug info
  *
@@ -66,6 +59,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"flag"
+	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 //
@@ -102,29 +96,59 @@ func debug(s string) {
 
 // Download a file from an S3 location, to a local file
 func copyFromS3(source, destination string) error {
-	// no-op
-	return fmt.Errorf("Download is not currently implemented")
+	re := regexp.MustCompile(s3pathre)
+	parts := re.FindStringSubmatch(source)
+	bucket := parts[1]
+	sourcepath := parts[2]
+
+	if len(bucket) == 0 || len(sourcepath) == 0 {
+		return fmt.Errorf("The source path '%s' is invalid, must be in the form s3:bucket:/path/to/source\n", source)
+	}
+	
+	writer, err := os.Create(destination)
+	if err != nil {
+		return fmt.Errorf("Failed to open file '%s', error was: %s\n", destination, err)
+	}
+
+	downloader := s3manager.NewDownloader(nil)
+	if downloader == nil {
+		return fmt.Errorf("Internal Error: Failure creating NewDownloader @copyToS3()\n")
+	}
+
+	defer writer.Close()
+	bytesWritten, err2 := downloader.Download(writer, &s3.GetObjectInput{
+		Bucket:   aws.String(bucket),
+		Key:      aws.String(sourcepath),
+	})
+
+	if err2 != nil {
+		return fmt.Errorf("Failed to download source file '%s' to destination '%s'\nError from S3 was: %s\n", source, destination, err2)
+	}
+
+	debug(fmt.Sprintf("Downloaded '%s', %d bytes retrieved\n", source, bytesWritten))
+
+	return nil
 }
 
 // Upload a file to an S3 location, from a local file
-func copyToS3(s, d string) error {
+func copyToS3(source, destination string) error {
 	re := regexp.MustCompile(s3pathre)
-	parts := re.FindStringSubmatch(d)
+	parts := re.FindStringSubmatch(destination)
 	bucket := parts[1]
 	destpath := parts[2]
 
 	if len(bucket) == 0 || len(destpath) == 0 {
-		return fmt.Errorf("The destination path '%s' is invalid, must be in the form s3:bucket:/path/to/destination\n", d)
+		return fmt.Errorf("The destination path '%s' is invalid, must be in the form s3:bucket:/path/to/destination\n", destination)
 	}
 	
-	reader, err := os.Open(s)
+	reader, err := os.Open(source)
 	if err != nil {
-		return fmt.Errorf("Failed to open file '%s', error was: %s\n", s, err)
+		return fmt.Errorf("Failed to open file '%s', error was: %s\n", source, err)
 	}
 
 	uploader := s3manager.NewUploader(nil)
 	if uploader == nil {
-		return fmt.Errorf("Internal Error: Filure creating NewUploader @copyToS3()\n")
+		return fmt.Errorf("Internal Error: Failure creating NewUploader @copyToS3()\n")
 	}
 
 	defer reader.Close()
@@ -135,10 +159,10 @@ func copyToS3(s, d string) error {
 	})
 
 	if err2 != nil {
-		return fmt.Errorf("Failed to upload source file '%s' to destination '%s'\nError from S3 was: %s\n", s, d, err2)
+		return fmt.Errorf("Failed to upload source file '%s' to destination '%s'\nError from S3 was: %s\n", source, destination, err2)
 	}
 
-	debug(fmt.Sprintf("Post-upload file destionation URL:='%s'\n",result.Location))
+	debug(fmt.Sprintf("Post-upload file destination URL:='%s'\n",result.Location))
 
 	return nil
 }
