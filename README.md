@@ -1,15 +1,19 @@
 #s3cp
 An scp-style command-line tool for uploading and downloading files to and from an AWS S3 bucket.
 
+### TOC
+[License](README.md#License)
+[Project Status](README.md#Current Status)
+
 ### License
 Released under the Apache 2.0 license
 
 ### Current Status
-s3cp is currently in beta verion 0.1
-* Uploading to an S3 bucket works
+s3cp is currently in beta verion 0.2
+* Uploading to an S3 bucket
+* Downloading from an S3 bucket
 * Errors are trapped and reported properly
 * Exit codes work as expected (0 for success, non-0 for failure)
-* **Downloads are not working yet**
 
 # How to use s3cp
 
@@ -23,7 +27,7 @@ If you intend to compile, you'll need to install the Go language
 
 If you have Go installed, you can get s3cp the "Go way" like this:
 ```
-go get -u http://github.com/aws/aws-sdk-go
+go get -u http://github.com/aws/aws-sdk-go/...
 go get http://github.com/tdunnington/s3cp
 ```
 
