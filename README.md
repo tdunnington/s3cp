@@ -1,3 +1,4 @@
+
 #s3cp
 An scp-style command-line tool for uploading and downloading files to and from an AWS S3 bucket.
 
@@ -22,6 +23,30 @@ s3cp is currently in beta verion 0.2
 * Errors are trapped and reported properly
 * Exit codes work as expected (0 for success, non-0 for failure)
 
+# Quick Start
+This quick start assumes you know how to create access keys for your AWS bucket, and setup
+policies in AWS, etc. If you don't, you need [How to use s3cp](README.md#how-to-use-s3cp) instead.
+
+Download the executable for your plaform, and run it like so. If you are on another platform, you
+must set the two environment variables in the appropriate manner.
+
+To download (*nix):
+```
+export AWS_ACCESS_KEY_ID=<your key id here>
+export AWS_SECRET_ACCESS_KEY=<your key here>
+./s3cp s3:bucket:/path/to/file.example /destination/path/file.example
+```
+
+To upload (*nix):
+```
+export AWS_ACCESS_KEY_ID=<your key id here>
+export AWS_SECRET_ACCESS_KEY=<your key here>
+./s3cp /source/path/file.example s3:bucket:/path/to/destination/file.example
+```
+You must use full paths, including the file name. s3cp does not allow shortcuts like cp does.
+
+For help, `s3cp -help`, or read [more about using s3cp](README.md#step-4---use-s3cp).
+
 # How to use s3cp
 
 ### Step 1 - Install s3cp
@@ -34,8 +59,8 @@ If you intend to compile, you'll need to install the Go language
 
 If you have Go installed, you can get s3cp the "Go way" like this:
 ```
-go get -u http://github.com/aws/aws-sdk-go/...
-go get http://github.com/tdunnington/s3cp
+go get -u github.com/aws/aws-sdk-go/...
+go get github.com/tdunnington/s3cp
 ```
 
 ### Step 2 - Setup your AWS S3 Bucket
