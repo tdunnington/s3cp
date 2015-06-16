@@ -5,6 +5,7 @@ An scp-style command-line tool for uploading and downloading files to and from a
 ### TOC
 * [License](README.md#license)
 * [Project Status](README.md#current-status)
+* [Quick Start](README.md#quick-start)
 * [How to use s3cp](README.md#how-to-use-s3cp)
   * [Install s3cp](README.md#step-1---install-s3cp)
   * [Setup your bucket](README.md#step-2---setup-your-aws-s3-bucket)
