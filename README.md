@@ -2,8 +2,10 @@
 An scp-style command-line tool for uploading and downloading files to and from an AWS S3 bucket.
 
 ### TOC
-[License](README.md#License)
-[Project Status](README.md#Current Status)
+* [License](README.md#license)
+* [Project Status](README.md#current-status)
+* [How to use s3cp](README.md#how-to-use-s3cp)
+** [Install s3cp](README.md#step-1-install-s3cp)
 
 ### License
 Released under the Apache 2.0 license
