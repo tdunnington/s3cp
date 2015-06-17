@@ -77,7 +77,7 @@ The executable file for your platform will be in $GOPATH/bin.
 Setting up an S3 bucket to work with s3cp is really about security. The policy editors have become much
 easier to use over the last year.
 
-Please note that these are my recommended settings. You are ultimately responsible for the security of your bucket!
+**Please note that these are my recommended settings. You are ultimately responsible for the security of your bucket!**
 
 **Setting up with a user account**
 
@@ -108,7 +108,7 @@ bucket name:
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "removed for security",
+            "Sid": "S3-1",
             "Effect": "Allow",
             "Action": [
                 "s3:DeleteObject",
@@ -127,7 +127,7 @@ bucket name:
                 "s3:PutObjectVersionAcl"
             ],
             "Resource": [
-                "arn:aws:s3:::<PUT BUCKET NAME HERE>/*"
+                "arn:aws:s3:::<PUT YOUR BUCKET NAME HERE>/*"
             ]
         }
     ]
