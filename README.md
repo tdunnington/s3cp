@@ -71,7 +71,7 @@ go get -u github.com/aws/aws-sdk-go/...
 go get github.com/tdunnington/s3cp
 ```
 
-The executable file for your platform will be in $GOPATH/src/github.com/tdunnington/s3cp/.
+The executable file for your platform will be in $GOPATH/bin.
 
 ### Step 2 - Setup your AWS S3 Bucket
 Setting up an S3 bucket to work with s3cp is really about security. The policy editors have become much
