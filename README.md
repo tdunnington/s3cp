@@ -55,9 +55,12 @@ For help, `s3cp -help`, or read [more about using s3cp](README.md#step-4---use-s
 # How to use s3cp
 
 ### Step 1 - Install s3cp
-You can download the executable from the homepage, or you can get the sources and compile. The
-executable is statically linked (as all Go programs are), so you can download the executable
-and run it without installing Go.
+You can [download the binaries in a single zipfile](https://github.com/tdunnington/s3cp/releases/download/v0.2-beta/s3cp-0.2.zip), or you can compile from source. There is no installer required; just extract the s3cp executable for your platform from the zip file:
+* For 64-bit linux, extract linux/amd64/s3cp
+* For 64-bit windows (7 or 8), extract windows/amd64/s3cp.exe
+* For 64-bit OSX, extract osx/amd64/s3cp
+
+Put the executable in a suitable location ($HOME/bin, c:\bin, /usr/local/bin, etc), add the directory to your PATH, and run it.
 
 If you intend to compile, you'll need to install the Go language
 (for more information about installing Go on your platform, visit the [Go homepage](http://golang.org))
@@ -67,6 +70,8 @@ If you have Go installed, you can get s3cp the "Go way" like this:
 go get -u github.com/aws/aws-sdk-go/...
 go get github.com/tdunnington/s3cp
 ```
+
+The executable file for your platform will be in $GOPATH/src/github.com/tdunnington/s3cp/.
 
 ### Step 2 - Setup your AWS S3 Bucket
 Setting up an S3 bucket to work with s3cp is really about security. The policy editors have become much
