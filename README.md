@@ -15,7 +15,7 @@ An scp-style command-line tool for uploading and downloading files to and from a
 * [Upcoming features](README.md#upcoming-features)
 
 ### License
-Released under the Apache 2.0 license
+Released under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0)
 
 ### Current Status
 s3cp is currently in beta verion 0.2
@@ -25,26 +25,30 @@ s3cp is currently in beta verion 0.2
 * Exit codes work as expected (0 for success, non-0 for failure)
 
 # Quick Start
-This quick start assumes you know how to create access keys for your AWS bucket, and setup
+This quick start assumes you know how to create access keys for your AWS bucket, setup
 policies in AWS, etc. If you don't, you need [How to use s3cp](README.md#how-to-use-s3cp) instead.
 
-Download the executable for your plaform, and run it like so. If you are on another platform, you
-must set the two environment variables in the appropriate manner.
+Download the [binary zipfile](https://github.com/tdunnington/s3cp/releases/download/v0.2-beta/s3cp-0.2.zip) and extract the executable for your OS:
+* For 64-bit Windows 7,8,8.1 - windows/amd64/s3cp.exe
+* For 64-bit linux - linux/amd64/s3cp
+* For OSX - osx/amd64/s3cp
+* There are many other platforms and architectures in the zip file
 
-To download (*nix):
+To download from S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
 ./s3cp s3:bucket:/path/to/file.example /destination/path/file.example
 ```
 
-To upload (*nix):
+To upload to S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
 ./s3cp /source/path/file.example s3:bucket:/path/to/destination/file.example
 ```
-You must use full paths, including the file name. s3cp does not allow shortcuts like cp does.
+
+You must use full paths to all files, including the file name. s3cp does not allow shortcuts like cp does.
 
 For help, `s3cp -help`, or read [more about using s3cp](README.md#step-4---use-s3cp).
 
@@ -236,4 +240,3 @@ and more. With the complete toolkit, you should be able to script some cool cmdl
 For s3cp, still left to do are:
 * Redirect STDIN and STDOUT, or piping
 * On-the-fly compression
-* Not sure how the `go get` dependencies work for my package, need to check that out
