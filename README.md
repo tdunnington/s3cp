@@ -38,14 +38,14 @@ To download from S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
-./s3cp s3:bucket:/path/to/file.example /destination/path/file.example
+s3cp s3:bucket:/path/to/file.example /destination/path/file.example
 ```
 
 To upload to S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
-./s3cp /source/path/file.example s3:bucket:/path/to/destination/file.example
+s3cp /source/path/file.example s3:bucket:/path/to/destination/file.example
 ```
 
 You must use full paths to all files, including the file name. s3cp does not allow shortcuts like cp does.
