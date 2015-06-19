@@ -67,7 +67,6 @@ If you intend to compile, you'll need to install the Go language
 
 If you have Go installed, you can get s3cp the "Go way" like this:
 ```
-go get -u github.com/aws/aws-sdk-go/...
 go get github.com/tdunnington/s3cp
 ```
 
