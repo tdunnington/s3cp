@@ -19,4 +19,5 @@ mv ./s3cp_windows_amd64.exe /tmp/$1/windows/amd64/s3cp.exe
 
 mv /tmp/$1/darwin /tmp/$1/osx
 
-zip 
+cd /tmp/$1
+zip -r ${1}.zip *
