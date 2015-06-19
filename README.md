@@ -23,6 +23,7 @@ s3cp is currently in beta verion 0.2
 * Downloading from an S3 bucket
 * Errors are trapped and reported properly
 * Exit codes work as expected (0 for success, non-0 for failure)
+* Support for reduced redundancy when uploading
 
 # Quick Start
 This quick start assumes you know how to create access keys for your AWS bucket, setup
