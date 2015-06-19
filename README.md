@@ -18,7 +18,7 @@ An scp-style command-line tool for uploading and downloading files to and from a
 Released under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0)
 
 ### Current Status
-s3cp is currently in beta verion 0.2
+s3cp is currently in beta verion 0.3
 * Uploading to an S3 bucket
 * Downloading from an S3 bucket
 * Errors are trapped and reported properly
@@ -29,7 +29,7 @@ s3cp is currently in beta verion 0.2
 This quick start assumes you know how to create access keys for your AWS bucket, setup
 policies in AWS, etc. If you don't, you need [How to use s3cp](README.md#how-to-use-s3cp) instead.
 
-Download the [binary zipfile](https://github.com/tdunnington/s3cp/releases/download/v0.2-beta/s3cp-0.2.zip) and extract the executable for your OS:
+Download the [binary zipfile](https://github.com/tdunnington/s3cp/releases/download/0.3-beta/s3cp-0.3.zip) and extract the executable for your OS:
 * For 64-bit Windows 7,8,8.1 - windows/amd64/s3cp.exe
 * For 64-bit linux - linux/amd64/s3cp
 * For OSX - osx/amd64/s3cp
@@ -56,7 +56,7 @@ For help, `s3cp -help`, or read [more about using s3cp](README.md#step-4---use-s
 # How to use s3cp
 
 ### Step 1 - Install s3cp
-You can [download the binaries in a single zipfile](https://github.com/tdunnington/s3cp/releases/download/v0.2-beta/s3cp-0.2.zip), or you can compile from source. There is no installer required; just extract the s3cp executable for your platform from the zip file:
+You can [download the binaries in a single zipfile](https://github.com/tdunnington/s3cp/releases/download/0.3-beta/s3cp-0.3.zip), or you can compile from source. There is no installer required; just extract the s3cp executable for your platform from the zip file:
 * For 64-bit linux, extract linux/amd64/s3cp
 * For 64-bit windows (7 or 8), extract windows/amd64/s3cp.exe
 * For 64-bit OSX, extract osx/amd64/s3cp
