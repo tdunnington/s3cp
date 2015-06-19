@@ -108,23 +108,11 @@ bucket name:
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "S3-1",
+            "Sid": "S31",
             "Effect": "Allow",
             "Action": [
-                "s3:DeleteObject",
-                "s3:DeleteObjectVersion",
-                "s3:GetBucketPolicy",
                 "s3:GetObject",
-                "s3:GetObjectAcl",
-                "s3:GetObjectVersion",
-                "s3:GetObjectVersionAcl",
-                "s3:ListBucket",
-                "s3:ListBucketMultipartUploads",
-                "s3:ListBucketVersions",
-                "s3:ListMultipartUploadParts",
-                "s3:PutObject",
-                "s3:PutObjectAcl",
-                "s3:PutObjectVersionAcl"
+                "s3:PutObject"
             ],
             "Resource": [
                 "arn:aws:s3:::<PUT YOUR BUCKET NAME HERE>/*"
@@ -134,8 +122,7 @@ bucket name:
 }
 ```
 
-**Note**: I am not certain that these are the minimal permissions necessary. I have not found documentation that 
-makes it clear what permissions are required to add an item to a bucket using the [s3manager](http://github.com/aws/aws-sdk-go/service/s3/s3manager) that is used by s3cp.
+Of course, if you intend to just upload or just download, you can remove the GetObject or PutObject actions.
 
 Now, create a user for s3cp, and save the AWS security keys. These screenshots show an actual AWS key pair;
 rest assured that key pair has been deleted and is not valid.
@@ -175,6 +162,8 @@ variable `AWS_PROFILE`):
 aws_access_key_id = <put your access key id here>
 aws_secret_access_key = <put the secret key here>
 ```
+
+**NOTE:** the key names are case sensitive, so while the shell environment variables are all caps, the credentials file variables are all lower case!
 
 If you are going to run a cronjob or other script from various user accounts, make sure that the user in question has a credentials file. So you may have to create multiple credentials files, or use the command line approach below.
 
