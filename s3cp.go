@@ -18,7 +18,7 @@
  *
  * USAGE:
  *
- *     s3cp [--help] [--quiet] [--debug] [--region regionname] source destination
+ *     s3cp [--help] [--quiet] [--debug] [--region regionname] [--rr] source destination
  *
  * WHERE:
  *
@@ -29,6 +29,8 @@
  *     --debug         : debug mode, prints lots of debug info
  *
  *     --region        : the AWS region of the target bucket; defaults to us-east-1
+ *
+ *     --rr            : sets the upload to reduced redundancy; has no effect on download
  *
  *     "source" and "desination" can be either local or remote objects, and both
  *     are required.
@@ -69,6 +71,7 @@ var isQuietMode bool = false
 var isDebugMode bool = false
 var region string = "us-east-1"
 var s3pathre = "^s3:([^:]+):(.+)$"
+var isReducedRedundancy bool = false
 
 // Prints the help information to stdout
 func printHelp() {
@@ -151,12 +154,18 @@ func copyToS3(source, destination string) error {
 		return fmt.Errorf("Internal Error: Failure creating NewUploader @copyToS3()\n")
 	}
 
-	defer reader.Close()
-	result, err2 := uploader.Upload(&s3manager.UploadInput{
+	uploadInput := s3manager.UploadInput{
 		Body:     reader,
 		Bucket:   aws.String(bucket),
 		Key:      aws.String(destpath),
-	})
+	}
+
+	if isReducedRedundancy {
+		uploadInput.StorageClass = aws.String("REDUCED_REDUNDANCY")
+	}
+
+	defer reader.Close()
+	result, err2 := uploader.Upload(&uploadInput)
 
 	if err2 != nil {
 		return fmt.Errorf("Failed to upload source file '%s' to destination '%s'\nError from S3 was: %s\n", source, destination, err2)
@@ -174,6 +183,7 @@ func parseCmdline() (source string, dest string) {
 	flag.BoolVar(&isDebugMode, "debug", false, "(optional) Used for debugging; outputs lots of debug info")
 	flag.BoolVar(&isQuietMode, "quiet", false, "(optional) Suppresses output")
 	flag.StringVar(&region, "region", "us-east-1", "(optional) The AWS region holding the target bucket; defaults to 'us-east-1'")
+	flag.BoolVar(&isReducedRedundancy, "rr", false, "(optional) Sets the upload to reduced redundancy")
 	flag.Parse()
 
 	debug(fmt.Sprintf("got args '%s'\n", os.Args))
