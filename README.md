@@ -26,8 +26,7 @@ s3cp is currently in beta verion 0.3
 * Support for reduced redundancy when uploading
 
 # Quick Start
-This quick start assumes you know how to create access keys for your AWS bucket, setup
-policies in AWS, etc. If you don't, you need [How to use s3cp](README.md#how-to-use-s3cp) instead.
+This quick start assumes you know how to create access keys and a policy for accessing your AWS bucket, etc. If you don't, you need [How to use s3cp](README.md#how-to-use-s3cp) instead.
 
 Download the [binary zipfile](https://github.com/tdunnington/s3cp/releases/download/0.3-beta/s3cp-0.3.zip) and extract the executable for your OS:
 * For 64-bit Windows 7,8,8.1 - windows/amd64/s3cp.exe
@@ -35,14 +34,14 @@ Download the [binary zipfile](https://github.com/tdunnington/s3cp/releases/downl
 * For OSX - osx/amd64/s3cp
 * There are many other platforms and architectures in the zip file
 
-To download from S3 (*nix):
+To download a file from S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
 s3cp s3:bucket:/path/to/file.example /destination/path/file.example
 ```
 
-To upload to S3 (*nix):
+To upload a file to S3 (*nix):
 ```
 export AWS_ACCESS_KEY_ID=<your key id here>
 export AWS_SECRET_ACCESS_KEY=<your key here>
@@ -210,6 +209,7 @@ Otherwise, you have some commandline options:
   -help: (optional) Prints this help message; default is false
   -quiet: (optional) Suppresses output, useful for scripting; default is false
   -region: (optional) The AWS region holding the target bucket; defaults to 'us-east-1'
+  -rr: (optional) Upload a file with reduced redundancy
 ```
 
 **Note about region**: The region name will display in the AWS console differently than the region id 
